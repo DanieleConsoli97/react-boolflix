@@ -1,22 +1,58 @@
-import { useState , useEffect } from "react"
-const Header = ()=>{
+import { useState } from "react";
 
-const [films,setFilms] = useState({})
 
-const apiRequest =  ()=>{
-      fetch("https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=ritorno")
-        .then(res => res.json())
-        .then(res=> res)
-        .then(setFilms)
-        .catch(err => console.error(err));
-}    
-useEffect(apiRequest , [])
-    const filmsList = films.result   
-    console.log(filmsList)
-    return(
+const Header = () => {
+    // NOTE - Utilizziamo useState per memorizzare l'elenco dei film ottenuti dalla richiesta API
+    const [films, setFilms] = useState([]);
+
+    // NOTE - Utilizziamo useState per memorizzare il valore dell'input di ricerca
+    const [search, setSearch] = useState("");
+
+    // Funzione per effettuare la richiesta API
+    const apiRequest = (value) => {
+        // Recupera la chiave API dal file .env
+        let key = import.meta.env.VITE_SOME_KEY;
+
+        //NOTE -  Effettua una richiesta fetch all'API di The Movie DB
+        fetch(
+            `https://api.themoviedb.org/3/search/tv?api_key=${key}&language=it_IT&query=${value}`
+        )
+            .then((res) => res.json()) //NOTE -  Converte la risposta in JSON
+            .then((res) => res.results) //NOTE - Estrae i risultati dalla risposta
+            .then(setFilms) //NOTE - Imposta i film con i risultati ottenuti
+            .catch((err) => console.error(err)); // Gestisce eventuali errori
+    };
+
+    //NOTE - Funzione per gestire l'input dell'utente
+    const handleInput = (event) => {
+        setSearch(event.target.value); //NOTE - Aggiorna lo stato `search` con il valore corrente dell'input
+        console.log(search); //NOTE - Stampa il valore corrente di `search` nella console
+    };
+
+   
+    return (
         <>
-        <h1></h1>
+            {/* Input per la ricerca */}
+            <input onChange={handleInput} type="text" />
+
+            {/* Bottone per avviare la ricerca */}
+            <button onClick={() => apiRequest(search)}>Cliccami</button>
+
+            {/* map attraverso l'array `films` per ottenere i  dettagli di ogni film ricercato */}
+            {films.map((film) => {
+                const { id, name, original_name, origin_country, vote_average } = film;
+                return (
+                    <ul key={id}>
+                        <li> {name}</li>
+                        <li> {original_name}</li>
+                        <li> {origin_country}</li>
+                        <li> {vote_average}</li>
+                    </ul>
+                );
+            })}
         </>
-    )
-}
-export default Header
+    );
+};
+
+// Esporta il componente Header come default
+export default Header;
