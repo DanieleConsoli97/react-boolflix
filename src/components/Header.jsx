@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 const Header = () => {
     // NOTE - Utilizziamo useState per memorizzare l'elenco dei film ottenuti dalla richiesta API
     const [films, setFilms] = useState([]);
@@ -28,8 +27,58 @@ const Header = () => {
         setSearch(event.target.value); //NOTE - Aggiorna lo stato `search` con il valore corrente dell'input
         console.log(search); //NOTE - Stampa il valore corrente di `search` nella console
     };
+    
+    //NOTE -  creo la function e gli passo come valore origin_country recuperato dalla chiamata API
+    function flagSet(origin) {
+        //NOTE -  Converti l'input 'origin' in una stringa per assicurarti che il confronto nel switch sia corretto
+        switch (String(origin)) {
+            
+            case "US":
+                return (
+                    <img src="src\assets\Flags\us.png"></img>
+                );
+            
+           
+            case "IT":
+                return (
+                    <img src="src\assets\Flags\it.png"></img>
+                );
+            
+           
+            case "FR":
+                return (
+                    <img src="src\assets\Flags\fr.png"></img>
+                );
+            
+           
+            case "UK":
+                return (
+                    <img src="src\assets\Flags\uk.png"></img>
+                );
+            
+           
+            case "JP":
+                return (
+                    <img src="src\assets\Flags\jp.png"></img>
+                );
+            
+           
+            case "DE":
+                return (
+                    <img src="src\assets\Flags\de.png"></img>
+                );
+            
+            // Se 'origin' non corrisponde a nessuno dei casi precedenti, stampa il valore di 'origin' nella console
+            default:
+                console.log(origin);
+                // Restituisci un messaggio di "NotFound" sotto forma di paragrafo
+                return (<p>NotFound</p>);
+        }
+    }
 
-   
+}
+
+
     return (
         <>
             {/* Input per la ricerca */}
@@ -45,7 +94,9 @@ const Header = () => {
                     <ul key={id}>
                         <li> {name}</li>
                         <li> {original_name}</li>
-                        <li> {origin_country}</li>
+
+                        <li> {flagSet(origin_country)}</li>
+                        
                         <li> {vote_average}</li>
                     </ul>
                 );
