@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { BiColor } from "react-icons/bi";
 
 const Header = () => {
-
-
     // NOTE - Utilizziamo useState per memorizzare l'elenco dei film ottenuti dalla richiesta API
     const [films, setFilms] = useState([]);
 
@@ -49,7 +46,7 @@ const Header = () => {
     //NOTE - Funzione per gestire l'input dell'utente
     const handleInput = (event) => {
         setSearch(event.target.value); //NOTE - Aggiorna lo stato `search` con il valore corrente dell'input
-        console.log(search); //NOTE - Stampa il valore corrente di `search` nella console
+        // console.log(search); //NOTE - Stampa il valore corrente di `search` nella console
     };
 
 
@@ -135,6 +132,7 @@ const Header = () => {
                     );
                 })}
             </div>
+
             <div className="SerieTv">
             <p>Serie TV</p>
             {tvSeries.map((tvSerie) => {
