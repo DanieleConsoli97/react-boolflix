@@ -1,17 +1,21 @@
 import { useState } from "react";
+import { BiColor } from "react-icons/bi";
 
 const Header = () => {
+
+
     // NOTE - Utilizziamo useState per memorizzare l'elenco dei film ottenuti dalla richiesta API
     const [films, setFilms] = useState([]);
+
 
     // NOTE - Utilizziamo useState per memorizzare il valore dell'input di ricerca
     const [search, setSearch] = useState("");
 
-    // Funzione per effettuare la richiesta API
+
+    //NOTE - Funzione per effettuare la richiesta API
     const apiRequest = (value) => {
         // Recupera la chiave API dal file .env
         let key = import.meta.env.VITE_SOME_KEY;
-
         //NOTE -  Effettua una richiesta fetch all'API di The Movie DB
         fetch(
             `https://api.themoviedb.org/3/search/tv?api_key=${key}&language=it_IT&query=${value}`
@@ -22,85 +26,98 @@ const Header = () => {
             .catch((err) => console.error(err)); // Gestisce eventuali errori
     };
 
+
+
+
+
+
     //NOTE - Funzione per gestire l'input dell'utente
     const handleInput = (event) => {
         setSearch(event.target.value); //NOTE - Aggiorna lo stato `search` con il valore corrente dell'input
         console.log(search); //NOTE - Stampa il valore corrente di `search` nella console
     };
-    
-    //NOTE -  creo la function e gli passo come valore origin_country recuperato dalla chiamata API
+
+
+
+
+
+    //NOTE - Funzione per gestire la visualizzazione delle bandiere passando come parametro origin country preso dalla chiamata API
     function flagSet(origin) {
-        //NOTE -  Converti l'input 'origin' in una stringa per assicurarti che il confronto nel switch sia corretto
+        //NOTE - Converto l'input 'origin' in una stringa per assicurarti che il confronto nel switch sia corretto
+
         switch (String(origin)) {
-            
-            case "US":
-                return (
-                    <img src="src\assets\Flags\us.png"></img>
-                );
-            
-           
-            case "IT":
-                return (
-                    <img src="src\assets\Flags\it.png"></img>
-                );
-            
-           
-            case "FR":
-                return (
-                    <img src="src\assets\Flags\fr.png"></img>
-                );
-            
-           
-            case "UK":
-                return (
-                    <img src="src\assets\Flags\uk.png"></img>
-                );
-            
-           
-            case "JP":
-                return (
-                    <img src="src\assets\Flags\jp.png"></img>
-                );
-            
-           
-            case "DE":
-                return (
-                    <img src="src\assets\Flags\de.png"></img>
-                );
-            
-            // Se 'origin' non corrisponde a nessuno dei casi precedenti, stampa il valore di 'origin' nella console
+            case "US": return (
+                <img src="src\assets\Flags/us.png"></img>
+            );
+            case "IT": return (
+                <img src="src\assets\Flags/it.png"></img>
+            )
+            case "FR": return (
+                <img src="src\assets\Flags/fr.png"></img>
+            )
+            case "UK": return (
+                <img src="src\assets\Flags\uk.png"></img>
+            )
+            case "JP": return (
+                <img src="src\assets\Flags\jp.png"></img>
+            )
+            case "DE": return (
+                <img src="src\assets\Flags\de.png"></img>
+            )
+            //NOTE - Se 'origin' non corrisponde a nessuno dei casi precedenti,si applica il caso default
             default:
-                console.log(origin);
-                // Restituisci un messaggio di "NotFound" sotto forma di paragrafo
-                return (<p>NotFound</p>);
+                return (<p>NotFound</p>)
         }
+
     }
 
-}
 
+
+    //NOTE - Funzione per gestire le stelline
+    //NOTE - Passiamo come dato vote averange ottenuto dalla chiamanta
+    function Star(vote) {
+         //NOTE - Prendiamo il valore lo dividiamo per 2 e lo arrotondiamo per difetto
+        const voteStars = Math.floor(vote / 2)
+        const ArrStar = []
+        console.log(ArrStar)
+         //NOTE - pushiamo in un array le stelline
+        for (let i = 1; i <= 5; i++) {
+            ArrStar.push(
+                i <= voteStars ?(<span key={i}>&#9733;</span> ):(<span key={i}>&#9734;</span>)
+                
+            )
+        }
+        return ArrStar
+    }
 
     return (
         <>
+            <p> Sono stati trovati {films.length} Film</p>
             {/* Input per la ricerca */}
             <input onChange={handleInput} type="text" />
 
             {/* Bottone per avviare la ricerca */}
             <button onClick={() => apiRequest(search)}>Cliccami</button>
+            <div className="Film">
+                {/* map attraverso l'array `films` per ottenere i  dettagli di ogni film ricercato */}
+                {films.map((film) => {
+                    const { id, name, original_name, origin_country, vote_average } = film;
+                    return (
+                        <ul key={id}>
+                            <li> {name}</li>
+                            <li> {original_name}</li>
 
-            {/* map attraverso l'array `films` per ottenere i  dettagli di ogni film ricercato */}
-            {films.map((film) => {
-                const { id, name, original_name, origin_country, vote_average } = film;
-                return (
-                    <ul key={id}>
-                        <li> {name}</li>
-                        <li> {original_name}</li>
+                            <li> {flagSet(origin_country)}</li>
 
-                        <li> {flagSet(origin_country)}</li>
-                        
-                        <li> {vote_average}</li>
-                    </ul>
-                );
-            })}
+                            <li> {vote_average}</li>
+                            <li className="yellow">{Star(vote_average)}</li>
+                        </ul>
+                    );
+                })}
+            </div>
+            <div className="SerieTv">
+
+            </div>
         </>
     );
 };
