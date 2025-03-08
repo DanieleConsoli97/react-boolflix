@@ -5,10 +5,10 @@ import { ApiProvider } from "./contexts/ApiContexts"
 function App() {
 
   return (
-    <ApiProvider>
-        <Header/>
-        <Main />
-    </ApiProvider>
+    <>
+      <Header />
+      <Main />
+    </>
   )
 }
 

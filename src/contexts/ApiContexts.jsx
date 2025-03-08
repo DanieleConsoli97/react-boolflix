@@ -120,4 +120,4 @@ const ApiProvider =({children}) =>{
     )
 }
 const useApiContext = () => useContext(ApiContext)
-export default {ApiProvider,useApiContext}
+export  {ApiProvider, useApiContext}
