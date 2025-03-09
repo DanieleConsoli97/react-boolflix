@@ -60,29 +60,29 @@ const ApiProvider =({children}) =>{
             switch (String(origin).toLowerCase()) {
                 case "us": 
                 return (
-                    <img src="src\assets\Flags/us.png"></img>
+                    <img className="flag" src="src\assets\Flags/us.png"></img>
                 )
                 case "en": 
                 return (
-                    <img src="src\assets\Flags/us.png"></img>
+                    <img className="flag" src="src\assets\Flags/us.png"></img>
                 )
                 case "it": return (
-                    <img src="src\assets\Flags/it.png"></img>
+                    <img className="flag" src="src\assets\Flags/it.png"></img>
                 )
                 case "fr":return ( 
-                    <img src="src\assets\Flags/fr.png"></img>
+                    <img className="flag" src="src\assets\Flags/fr.png"></img>
                 )
                 case "uk": return (
-                    <img src="src\assets\Flags\uk.png"></img>
+                    <img className="flag" src="src\assets\Flags\uk.png"></img>
                 )
                 case "jp": return (
-                    <img src="src\assets\Flags\jp.png"></img>
+                    <img className="flag" src="src\assets\Flags\jp.png"></img>
                 )
                 case "ja": return (
-                    <img src="src\assets\Flags\jp.png"></img>
+                    <img className="flag" src="src\assets\Flags\jp.png"></img>
                 )
                 case "de": return (
-                    <img src="src\assets\Flags\de.png"></img>
+                    <img className="flag" src="src\assets\Flags\de.png"></img>
                 )
                 //NOTE - Se 'origin' non corrisponde a nessuno dei casi precedenti,si applica il caso default
                 default:

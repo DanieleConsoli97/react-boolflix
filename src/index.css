@@ -1,3 +1,75 @@
+/* general */
+*{
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+body{
+    background-color: black;
+}
+li{
+    list-style: none;
+    margin: 5px;
+}
+.flag{
+    width:50px;
+}
+.Card{
+    flex-basis: calc(100% / 5 - 20px);
+    
+}
+.Poster{
+    width: 100%;
+}
+/* Header */
+header{
+    background-color: red;
+    padding: 30px;
+}
+nav picture{
+flex-basis: 5%;
+}
+
+.searchBar{
+    flex-basis: 50%;
+    font-size: 1.4rem;
+    font-weight: bolder;
+}
+nav{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.logo{
+    width: 100%;
+display: block;
+}
+/* main */
+main p {
+    font-size: 2rem;
+}
+
 .yellow{
     color: gold;
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    text-align: center;
+    color: white;
+}
+.relative{
+    position:relative;
+}
+.absolute{
+    position: absolute; /* Posiziona il testo in modo assoluto rispetto al contenitore */
+    top: 50%; /* Posiziona il testo al 50% dall'alto */
+    left: 50%; /* Posiziona il testo al 50% da sinistra */
+    transform: translate(-50%, -50%); /* Centra il testo */
+    color: white; /* Colore del testo */
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente per il testo */
+    padding: 100px; /* Spaziatura interna */
+    width: 100%;
+    height: 100%;
 }
