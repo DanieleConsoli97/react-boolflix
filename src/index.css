@@ -7,6 +7,9 @@
 body{
     background-color: black;
 }
+ul{
+    width: 100%;
+}
 li{
     list-style: none;
     margin: 5px;
@@ -72,4 +75,11 @@ main p {
     padding: 100px; /* Spaziatura interna */
     width: 100%;
     height: 100%;
+}
+section{
+    color: white;
+    margin: 50px;
+}
+.text{
+    width: 100%;
 }
